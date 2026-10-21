@@ -10,6 +10,7 @@ import type {
   CheckAccountRequest,
   CheckAccountResponse,
   DeleteNotificationResponse,
+  GetAccountSettingsResponse,
   GetStateInstanceResponse,
   ReceiveNotificationRequest,
   ReceiveNotificationResponse,
@@ -67,6 +68,10 @@ export const greenApi = createApi({
       query: (instance) => ({ apiMethod: 'getStateInstance', instance }),
     }),
 
+    getAccountSettings: builder.query<GetAccountSettingsResponse, void>({
+      query: () => ({ apiMethod: 'getAccountSettings' }),
+    }),
+
     sendMessage: builder.mutation<SendMessageResponse, SendMessageRequest>({
       query: (body) => ({ apiMethod: 'sendMessage', method: 'POST', body }),
     }),
@@ -101,6 +106,7 @@ export const greenApi = createApi({
 export const {
   useGetStateInstanceQuery,
   useLazyGetStateInstanceQuery,
+  useGetAccountSettingsQuery,
   useSendMessageMutation,
   useCheckAccountMutation,
 } = greenApi

@@ -25,16 +25,16 @@
     display: none;
   }
 
-  .layout[data-chat-open='true'] {
+  .layout[data-panel-open='true'] {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .layout[data-chat-open='true'] .rail,
-  .layout[data-chat-open='true'] .sidebar {
+  .layout[data-panel-open='true'] .rail,
+  .layout[data-panel-open='true'] .sidebar {
     display: none;
   }
 
-  .layout[data-chat-open='true'] .main {
+  .layout[data-panel-open='true'] .main {
     display: block;
   }
 }

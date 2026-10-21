@@ -5,6 +5,7 @@
   justify-content: center;
   font-weight: var(--font-weight-bold);
   color: var(--color-text-on-accent);
+  overflow: hidden;
   border-radius: var(--radius-full);
   user-select: none;
 }
@@ -12,6 +13,12 @@
 .icon {
   width: 50%;
   height: 50%;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* Sizes */
@@ -31,6 +38,12 @@
   width: 56px;
   height: 56px;
   font-size: 21px;
+}
+
+.xl {
+  width: 88px;
+  height: 88px;
+  font-size: 32px;
 }
 
 /* Colors */

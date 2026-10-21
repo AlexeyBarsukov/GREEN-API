@@ -10,6 +10,13 @@ export interface GetStateInstanceResponse {
   stateInstance: StateInstance
 }
 
+export interface GetAccountSettingsResponse {
+  avatar: string
+  phone: string
+  stateInstance: StateInstance
+  chatId: string
+}
+
 export interface SendMessageRequest {
   chatId: string
   message: string

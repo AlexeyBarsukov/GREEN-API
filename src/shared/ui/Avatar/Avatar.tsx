@@ -1,14 +1,16 @@
 import { User } from 'lucide-react'
+import { useState } from 'react'
 import styles from './Avatar.module.css'
 
 // Gradients live in tokens.css as --avatar-gradient-0..5
 const AVATAR_GRADIENT_COUNT = 6
 
-type AvatarSize = 'sm' | 'md' | 'lg'
+type AvatarSize = 'sm' | 'md' | 'lg' | 'xl'
 
 interface AvatarProps {
   id: string
   name: string | null
+  src?: string
   size?: AvatarSize
 }
 
@@ -29,13 +31,23 @@ const getGradientClass = (id: string) => {
   return styles[`gradient${hash % AVATAR_GRADIENT_COUNT}`]
 }
 
-export function Avatar({ id, name, size = 'lg' }: AvatarProps) {
+export function Avatar({ id, name, src, size = 'lg' }: AvatarProps) {
+  const [failedSrc, setFailedSrc] = useState<string | null>(null)
   const initials = name ? getInitials(name) : ''
   const className = [styles.avatar, styles[size], getGradientClass(id)].join(' ')
+  const showImage = Boolean(src) && src !== failedSrc
+
+  const handleImageError = () => {
+    setFailedSrc(src ?? null)
+  }
 
   return (
     <div className={className} aria-hidden="true">
-      {initials || <User className={styles.icon} strokeWidth={2} />}
+      {showImage ? (
+        <img className={styles.image} src={src} alt="" onError={handleImageError} />
+      ) : (
+        initials || <User className={styles.icon} strokeWidth={2} />
+      )}
     </div>
   )
 }
