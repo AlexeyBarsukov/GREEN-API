@@ -36,14 +36,14 @@ export function AuthPage() {
 
   const isFilled = Object.values(form).every((value) => value.trim() !== '')
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleFieldChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
 
     setForm((prev) => ({ ...prev, [name]: value }))
     setError(null)
   }
 
-  const handleSubmit = async (event: SubmitEvent<HTMLFormElement>) => {
+  const handleLoginSubmit = async (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     const credentials: Credentials = {
@@ -84,12 +84,12 @@ export function AuthPage() {
           <h1 className={styles.title}>Войдите с данными инстанса GREEN-API</h1>
         </div>
 
-        <form className={styles.form} onSubmit={handleSubmit} noValidate>
+        <form className={styles.form} onSubmit={handleLoginSubmit} noValidate>
           <TextField
             name="idInstance"
             label="idInstance"
             value={form.idInstance}
-            onChange={handleChange}
+            onChange={handleFieldChange}
             inputMode="numeric"
             autoComplete="username"
             autoFocus
@@ -99,7 +99,7 @@ export function AuthPage() {
             label="apiTokenInstance"
             type="password"
             value={form.apiTokenInstance}
-            onChange={handleChange}
+            onChange={handleFieldChange}
             autoComplete="current-password"
           />
           <TextField
@@ -107,7 +107,7 @@ export function AuthPage() {
             label="apiUrl"
             type="url"
             value={form.apiUrl}
-            onChange={handleChange}
+            onChange={handleFieldChange}
             hint="Все данные есть в личном кабинете GREEN-API на странице инстанса"
           />
 

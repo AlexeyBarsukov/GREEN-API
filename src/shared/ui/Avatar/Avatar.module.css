@@ -1,0 +1,59 @@
+.avatar {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-on-accent);
+  border-radius: var(--radius-full);
+  user-select: none;
+}
+
+.icon {
+  width: 50%;
+  height: 50%;
+}
+
+/* Sizes */
+.sm {
+  width: 40px;
+  height: 40px;
+  font-size: 15px;
+}
+
+.md {
+  width: 48px;
+  height: 48px;
+  font-size: 18px;
+}
+
+.lg {
+  width: 56px;
+  height: 56px;
+  font-size: 21px;
+}
+
+/* Colors */
+.gradient0 {
+  background: var(--avatar-gradient-0);
+}
+
+.gradient1 {
+  background: var(--avatar-gradient-1);
+}
+
+.gradient2 {
+  background: var(--avatar-gradient-2);
+}
+
+.gradient3 {
+  background: var(--avatar-gradient-3);
+}
+
+.gradient4 {
+  background: var(--avatar-gradient-4);
+}
+
+.gradient5 {
+  background: var(--avatar-gradient-5);
+}

@@ -28,6 +28,19 @@
   --color-bubble-meta-in: #8d8f98;
   --color-bubble-meta-out: rgb(255 255 255 / 70%);
 
+  /* Avatars: count must match AVATAR_GRADIENT_COUNT in Avatar.tsx */
+  --avatar-gradient-0: linear-gradient(135deg, #ff8a65, #e8505b);
+  --avatar-gradient-1: linear-gradient(135deg, #ffca5f, #f08a24);
+  --avatar-gradient-2: linear-gradient(135deg, #6ee7a8, #1fa971);
+  --avatar-gradient-3: linear-gradient(135deg, #5fd4f5, #2f7bf5);
+  --avatar-gradient-4: linear-gradient(135deg, #8f9bff, #5b5ff0);
+  --avatar-gradient-5: linear-gradient(135deg, #d38bff, #9b4fe0);
+
+  /* Logo */
+  --color-logo-start: #3fb8f5;
+  --color-logo-middle: #4a5cf0;
+  --color-logo-end: #9b4fe0;
+
   /* Background pattern */
   --pattern: url('../assets/pattern.svg');
   --pattern-size: 240px;

@@ -1,0 +1,81 @@
+.item {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  width: 100%;
+  height: 82px;
+  padding: 0 16px;
+  text-align: left;
+  background: none;
+  border: none;
+  transition: background-color var(--transition);
+}
+
+.item:hover {
+  background-color: var(--color-surface-hover);
+}
+
+.item:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: -2px;
+}
+
+.active,
+.active:hover {
+  background-color: var(--color-surface-active);
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.title {
+  overflow: hidden;
+  font-weight: var(--font-weight-medium);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.date {
+  flex-shrink: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.preview {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--color-text-secondary);
+  overflow-wrap: anywhere;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.you {
+  color: var(--color-text);
+}
+
+.badge {
+  flex-shrink: 0;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 7px;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: 22px;
+  color: var(--color-text-on-accent);
+  text-align: center;
+  background-color: var(--color-accent);
+  border-radius: var(--radius-full);
+}

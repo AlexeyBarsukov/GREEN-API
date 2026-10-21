@@ -41,6 +41,10 @@ export const getErrorMessage = (error: FetchBaseQueryError | SerializedError | u
     return 'Слишком много запросов. Подождите немного'
   }
 
+  if (status === 469) {
+    return 'MAX ограничил частые проверки номеров. Попробуйте позже'
+  }
+
   if (status !== null && status >= 500) {
     return 'Сервер GREEN-API временно недоступен'
   }

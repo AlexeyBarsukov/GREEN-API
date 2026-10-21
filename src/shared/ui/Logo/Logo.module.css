@@ -7,6 +7,19 @@
 .icon {
   width: 40px;
   height: 40px;
+  color: var(--color-text-on-accent);
+}
+
+.stopStart {
+  stop-color: var(--color-logo-start);
+}
+
+.stopMiddle {
+  stop-color: var(--color-logo-middle);
+}
+
+.stopEnd {
+  stop-color: var(--color-logo-end);
 }
 
 .text {

@@ -1,0 +1,51 @@
+.dialog {
+  width: calc(100% - 32px);
+  max-width: 400px;
+  padding: 0;
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+}
+
+.dialog::backdrop {
+  background-color: rgb(0 0 0 / 60%);
+}
+
+.content {
+  padding: 20px 24px 24px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.title {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+}
+
+.close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  color: var(--color-text-secondary);
+  background: none;
+  border: none;
+  border-radius: var(--radius-full);
+  transition:
+    background-color var(--transition),
+    color var(--transition);
+}
+
+.close:hover {
+  color: var(--color-text);
+  background-color: var(--color-surface-hover);
+}
