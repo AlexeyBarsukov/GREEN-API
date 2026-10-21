@@ -33,6 +33,7 @@ export function AuthPage() {
   const logoutReason = useAppSelector(selectLogoutReason)
   const [form, setForm] = useState(initialForm)
   const [error, setError] = useState(logoutReason)
+  const [isApiUrlVisible, setApiUrlVisible] = useState(false)
   const [checkInstance, { isFetching }] = useLazyGetStateInstanceQuery()
 
   const isFilled = Object.values(form).every((value) => value.trim() !== '')
@@ -42,6 +43,10 @@ export function AuthPage() {
 
     setForm((prev) => ({ ...prev, [name]: value }))
     setError(null)
+  }
+
+  const handleApiUrlShow = () => {
+    setApiUrlVisible(true)
   }
 
   const handleLoginSubmit = async (event: SubmitEvent<HTMLFormElement>) => {
@@ -102,15 +107,24 @@ export function AuthPage() {
             value={form.apiTokenInstance}
             onChange={handleFieldChange}
             autoComplete="current-password"
+            hint="Оба значения есть в личном кабинете GREEN-API на странице инстанса"
           />
-          <TextField
-            name="apiUrl"
-            label="apiUrl"
-            type="url"
-            value={form.apiUrl}
-            onChange={handleFieldChange}
-            hint="Все данные есть в личном кабинете GREEN-API на странице инстанса"
-          />
+
+          {isApiUrlVisible ? (
+            <TextField
+              name="apiUrl"
+              label="apiUrl"
+              type="url"
+              value={form.apiUrl}
+              onChange={handleFieldChange}
+              hint="Укажите, если apiUrl в личном кабинете отличается от адреса по умолчанию"
+              autoFocus
+            />
+          ) : (
+            <button type="button" className={styles.toggle} onClick={handleApiUrlShow}>
+              Другой адрес API
+            </button>
+          )}
 
           {error && (
             <p className={styles.error} role="alert">

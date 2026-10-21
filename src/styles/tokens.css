@@ -39,11 +39,6 @@
   --avatar-gradient-4: linear-gradient(135deg, #8f9bff, #5b5ff0);
   --avatar-gradient-5: linear-gradient(135deg, #d38bff, #9b4fe0);
 
-  /* Logo */
-  --color-logo-start: #3fb8f5;
-  --color-logo-middle: #4a5cf0;
-  --color-logo-end: #9b4fe0;
-
   /* Background pattern */
   --pattern: url('../assets/pattern.svg');
   --pattern-size: 240px;
