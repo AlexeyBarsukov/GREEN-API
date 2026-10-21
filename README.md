@@ -2,6 +2,8 @@
 
 Веб-интерфейс для отправки и получения текстовых сообщений в мессенджере [MAX](https://max.ru) через сервис [GREEN-API](https://green-api.com/max). Внешний вид сделан по образцу [web.max.ru](https://web.max.ru).
 
+Демо: [green-api.website.yandexcloud.net](https://green-api.website.yandexcloud.net). Устанавливать ничего не нужно, достаточно открыть ссылку и войти с данными своего инстанса GREEN-API (см. [подготовку инстанса](#подготовка-инстанса-green-api)).
+
 Что умеет:
 
 - вход по `idInstance` и `apiTokenInstance` из личного кабинета GREEN-API;
