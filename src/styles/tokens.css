@@ -1,0 +1,62 @@
+:root {
+  color-scheme: dark;
+
+  /* Surfaces */
+  --color-bg: #121317;
+  --color-surface: #1b1c21;
+  --color-surface-raised: #24252b;
+  --color-surface-hover: #2a2b31;
+  --color-surface-active: #303138;
+  --color-border: #2a2b31;
+
+  /* Text */
+  --color-text: #f2f3f5;
+  --color-text-secondary: #8d8f98;
+  --color-text-muted: #5f616a;
+  --color-text-on-accent: #ffffff;
+
+  /* Accent */
+  --color-accent: #2f7bf5;
+  --color-accent-hover: #4a8df7;
+  --color-link: #3d8bfd;
+  --color-danger: #f0525a;
+  --color-success: #2fbf71;
+
+  /* Messages */
+  --color-bubble-in: #2b2c33;
+  --color-bubble-out: linear-gradient(90deg, #4a5cf0 0%, #7c4fe0 100%);
+  --color-bubble-meta-in: #8d8f98;
+  --color-bubble-meta-out: rgb(255 255 255 / 70%);
+
+  /* Background pattern */
+  --pattern: url('../assets/pattern.svg');
+  --pattern-size: 240px;
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Typography */
+  --font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-size-xs: 11px;
+  --font-size-sm: 13px;
+  --font-size-md: 15px;
+  --font-size-lg: 17px;
+  --font-size-xl: 24px;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 600;
+  --line-height: 1.35;
+
+  /* Layout */
+  --rail-width: 76px;
+  --sidebar-width: 394px;
+  --header-height: 64px;
+  --chat-max-width: 700px;
+
+  /* Motion */
+  --transition: 150ms ease;
+}

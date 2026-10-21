@@ -6,7 +6,7 @@ export interface Credentials {
   apiTokenInstance: string
 }
 
-interface AuthState {
+export interface AuthState {
   credentials: Credentials | null
 }
 
@@ -29,3 +29,5 @@ const authSlice = createSlice({
 
 export const { login, logout } = authSlice.actions
 export default authSlice.reducer
+
+export const selectCredentials = (state: { auth: AuthState }) => state.auth.credentials

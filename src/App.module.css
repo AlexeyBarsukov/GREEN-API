@@ -3,4 +3,7 @@
   align-items: center;
   justify-content: center;
   height: 100%;
+  background-color: var(--color-bg);
+  background-image: var(--pattern);
+  background-size: var(--pattern-size);
 }
