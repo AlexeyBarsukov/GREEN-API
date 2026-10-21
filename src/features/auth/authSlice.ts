@@ -1,4 +1,9 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import { loadFromStorage } from '../../shared/lib/storage'
+
+export const CREDENTIALS_STORAGE_KEY = 'credentials'
+
+export const DEFAULT_API_URL = 'https://api.green-api.com'
 
 export interface Credentials {
   apiUrl: string
@@ -11,7 +16,7 @@ export interface AuthState {
 }
 
 const initialState: AuthState = {
-  credentials: null,
+  credentials: loadFromStorage<Credentials>(CREDENTIALS_STORAGE_KEY),
 }
 
 const authSlice = createSlice({
