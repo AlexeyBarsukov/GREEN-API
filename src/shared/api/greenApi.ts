@@ -19,6 +19,10 @@ import type {
 
 const DEFAULT_RECEIVE_TIMEOUT = 20
 
+const RECEIVE_TIMEOUT_MARGIN = 40
+
+const EMPTY_QUEUE_STATUS = 408
+
 interface GreenApiArgs extends Omit<FetchArgs, 'url'> {
   apiMethod: string
   pathParam?: string | number
@@ -79,7 +83,8 @@ export const greenApi = createApi({
       query: ({ receiveTimeout = DEFAULT_RECEIVE_TIMEOUT } = {}) => ({
         apiMethod: 'receiveNotification',
         params: { receiveTimeout },
-        timeout: (receiveTimeout + 10) * 1000,
+        timeout: (receiveTimeout + RECEIVE_TIMEOUT_MARGIN) * 1000,
+        validateStatus: (response) => response.ok || response.status === EMPTY_QUEUE_STATUS,
       }),
     }),
 

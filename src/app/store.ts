@@ -1,12 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
-import authReducer from '../features/auth/authSlice'
-import chatsReducer, {
-  chatsRestored,
-  getChatsStorageKey,
-  type StoredChats,
-} from '../features/chats/chatsSlice'
+import authReducer, { login } from '../features/auth/authSlice'
+import chatsReducer from '../features/chats/chatsSlice'
 import { greenApi } from '../shared/api/greenApi'
-import { loadFromStorage } from '../shared/lib/storage'
 import { listenerMiddleware } from './listeners'
 
 export const store = configureStore({
@@ -22,11 +17,7 @@ export const store = configureStore({
 const { credentials } = store.getState().auth
 
 if (credentials) {
-  const storedChats = loadFromStorage<StoredChats>(getChatsStorageKey(credentials.idInstance))
-
-  if (storedChats) {
-    store.dispatch(chatsRestored(storedChats))
-  }
+  store.dispatch(login(credentials))
 }
 
 export type RootState = ReturnType<typeof store.getState>

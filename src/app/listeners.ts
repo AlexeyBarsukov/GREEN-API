@@ -9,9 +9,11 @@ import {
   messageAdded,
   messageFailed,
   messageSent,
+  messageStatusChanged,
   type StoredChats,
   selectStoredChats,
 } from '../features/chats/chatsSlice'
+import { pollNotifications } from '../features/notifications/pollNotifications'
 import { greenApi } from '../shared/api/greenApi'
 import { loadFromStorage, removeFromStorage, saveToStorage } from '../shared/lib/storage'
 import type { AppDispatch, RootState } from './store'
@@ -35,6 +37,18 @@ startAppListening({
 })
 
 startAppListening({
+  actionCreator: login,
+  effect: async (_, api) => {
+    api.cancelActiveListeners()
+
+    const polling = api.fork((task) => pollNotifications(api, task))
+
+    await api.condition(logout.match)
+    polling.cancel()
+  },
+})
+
+startAppListening({
   actionCreator: logout,
   effect: (_, api) => {
     removeFromStorage(CREDENTIALS_STORAGE_KEY)
@@ -45,7 +59,14 @@ startAppListening({
 
 // Chats are kept per instance, so they are restored after the next login
 startAppListening({
-  matcher: isAnyOf(chatAdded, activeChatChanged, messageAdded, messageSent, messageFailed),
+  matcher: isAnyOf(
+    chatAdded,
+    activeChatChanged,
+    messageAdded,
+    messageSent,
+    messageFailed,
+    messageStatusChanged,
+  ),
   effect: (_, api) => {
     const state = api.getState()
     const { credentials } = state.auth

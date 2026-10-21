@@ -1,12 +1,12 @@
 import { type ChangeEvent, type SubmitEvent, useState } from 'react'
-import { useAppDispatch } from '../../app/hooks'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { getErrorMessage, getStateInstanceMessage } from '../../shared/api/errors'
 import { useLazyGetStateInstanceQuery } from '../../shared/api/greenApi'
 import { Button } from '../../shared/ui/Button/Button'
 import { Logo } from '../../shared/ui/Logo/Logo'
 import { TextField } from '../../shared/ui/TextField/TextField'
 import styles from './AuthPage.module.css'
-import { type Credentials, DEFAULT_API_URL, login } from './authSlice'
+import { type Credentials, DEFAULT_API_URL, login, selectLogoutReason } from './authSlice'
 
 const CONSOLE_URL = 'https://console.green-api.com'
 
@@ -30,8 +30,9 @@ const validateCredentials = ({ idInstance, apiUrl }: Credentials) => {
 
 export function AuthPage() {
   const dispatch = useAppDispatch()
+  const logoutReason = useAppSelector(selectLogoutReason)
   const [form, setForm] = useState(initialForm)
-  const [error, setError] = useState<string | null>(null)
+  const [error, setError] = useState(logoutReason)
   const [checkInstance, { isFetching }] = useLazyGetStateInstanceQuery()
 
   const isFilled = Object.values(form).every((value) => value.trim() !== '')

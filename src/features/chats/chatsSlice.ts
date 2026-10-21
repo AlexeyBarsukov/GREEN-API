@@ -48,6 +48,13 @@ interface MessageFailedPayload {
   error: string
 }
 
+interface MessageStatusChangedPayload {
+  chatId: string
+  id: string
+  status: MessageStatus
+  error?: string
+}
+
 export interface ChatPreview {
   chat: Chat
   lastMessage: Message | null
@@ -62,6 +69,26 @@ const initialState: ChatsState = {
 export const getChatsStorageKey = (idInstance: string) => `chats:${idInstance}`
 
 const UNSENT_MESSAGE_ERROR = 'Сообщение не было отправлено'
+
+const STATUS_PROGRESS: Record<MessageStatus, number> = {
+  pending: 0,
+  failed: 1,
+  sent: 2,
+  delivered: 3,
+  read: 4,
+}
+
+const canChangeStatus = (current: MessageStatus | undefined, next: MessageStatus) => {
+  if (!current) {
+    return true
+  }
+
+  if (next === 'failed') {
+    return current === 'pending' || current === 'sent'
+  }
+
+  return STATUS_PROGRESS[next] > STATUS_PROGRESS[current]
+}
 
 const failPendingMessages = (messages: Message[]) =>
   messages.map((message) =>
@@ -166,6 +193,17 @@ const chatsSlice = createSlice({
         message.error = error
       }
     },
+    messageStatusChanged(state, action: PayloadAction<MessageStatusChangedPayload>) {
+      const { chatId, id, status, error } = action.payload
+      const message = state.messages[chatId]?.find((item) => item.id === id)
+
+      if (!message || !canChangeStatus(message.status, status)) {
+        return
+      }
+
+      message.status = status
+      message.error = status === 'failed' ? error : undefined
+    },
   },
 })
 
@@ -177,6 +215,7 @@ export const {
   messageAdded,
   messageSent,
   messageFailed,
+  messageStatusChanged,
 } = chatsSlice.actions
 export default chatsSlice.reducer
 
