@@ -27,6 +27,8 @@
   --color-bubble-out: linear-gradient(90deg, #4a5cf0 0%, #7c4fe0 100%);
   --color-bubble-meta-in: #8d8f98;
   --color-bubble-meta-out: rgb(255 255 255 / 70%);
+  --color-bubble-failed: #ffc2c5;
+  --color-day-label-bg: rgb(27 28 33 / 85%);
 
   /* Avatars: count must match AVATAR_GRADIENT_COUNT in Avatar.tsx */
   --avatar-gradient-0: linear-gradient(135deg, #ff8a65, #e8505b);

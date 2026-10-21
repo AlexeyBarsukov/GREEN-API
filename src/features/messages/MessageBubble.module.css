@@ -1,0 +1,77 @@
+.row {
+  display: flex;
+  margin-top: 8px;
+}
+
+.grouped {
+  margin-top: 2px;
+}
+
+.incoming {
+  justify-content: flex-start;
+}
+
+.outgoing {
+  justify-content: flex-end;
+}
+
+.bubble {
+  position: relative;
+  max-width: min(75%, 520px);
+  padding: 8px 12px;
+  border-radius: var(--radius-lg);
+}
+
+.incoming .bubble {
+  background: var(--color-bubble-in);
+}
+
+.outgoing .bubble {
+  color: var(--color-text-on-accent);
+  background: var(--color-bubble-out);
+}
+
+.text {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* Reserves room on the last line so the absolutely positioned time never overlaps the text */
+.spacer {
+  display: inline-block;
+  width: 44px;
+  height: 1px;
+}
+
+.outgoing .spacer {
+  width: 62px;
+}
+
+.meta {
+  position: absolute;
+  right: 10px;
+  bottom: 6px;
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+  font-size: var(--font-size-xs);
+  line-height: 1;
+  color: var(--color-bubble-meta-in);
+}
+
+.outgoing .meta {
+  color: var(--color-bubble-meta-out);
+}
+
+.status {
+  width: 14px;
+  height: 14px;
+}
+
+.read {
+  color: var(--color-text-on-accent);
+}
+
+.failed {
+  color: var(--color-bubble-failed);
+}

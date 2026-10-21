@@ -11,6 +11,7 @@ export interface Message {
   timestamp: number
   direction: MessageDirection
   status?: MessageStatus
+  error?: string
 }
 
 export interface Chat {
@@ -35,6 +36,18 @@ interface ChatAddedPayload {
   name?: string | null
 }
 
+interface MessageSentPayload {
+  chatId: string
+  localId: string
+  id: string
+}
+
+interface MessageFailedPayload {
+  chatId: string
+  id: string
+  error: string
+}
+
 export interface ChatPreview {
   chat: Chat
   lastMessage: Message | null
@@ -48,12 +61,28 @@ const initialState: ChatsState = {
 
 export const getChatsStorageKey = (idInstance: string) => `chats:${idInstance}`
 
+const UNSENT_MESSAGE_ERROR = 'Сообщение не было отправлено'
+
+const failPendingMessages = (messages: Message[]) =>
+  messages.map((message) =>
+    message.status === 'pending'
+      ? { ...message, status: 'failed' as const, error: UNSENT_MESSAGE_ERROR }
+      : message,
+  )
+
 const chatsSlice = createSlice({
   name: 'chats',
   initialState,
   reducers: {
     chatsRestored(_, action: PayloadAction<StoredChats>) {
-      return { ...action.payload, activeChatId: null }
+      const messages = Object.fromEntries(
+        Object.entries(action.payload.messages).map(([chatId, list]) => [
+          chatId,
+          failPendingMessages(list),
+        ]),
+      )
+
+      return { chats: action.payload.chats, messages, activeChatId: null }
     },
     chatsCleared() {
       return initialState
@@ -80,10 +109,75 @@ const chatsSlice = createSlice({
         chat.unreadCount = 0
       }
     },
+    messageAdded(state, action: PayloadAction<Message>) {
+      const message = action.payload
+      const { chatId } = message
+
+      state.chats[chatId] ??= {
+        id: chatId,
+        phone: null,
+        name: null,
+        createdAt: message.timestamp,
+        unreadCount: 0,
+      }
+
+      state.messages[chatId] ??= []
+
+      const messages = state.messages[chatId]
+
+      if (messages.some(({ id }) => id === message.id)) {
+        return
+      }
+
+      const insertIndex = messages.findLastIndex(({ timestamp }) => timestamp <= message.timestamp)
+
+      messages.splice(insertIndex + 1, 0, message)
+
+      if (message.direction === 'incoming' && state.activeChatId !== chatId) {
+        state.chats[chatId].unreadCount += 1
+      }
+    },
+    messageSent(state, action: PayloadAction<MessageSentPayload>) {
+      const { chatId, localId, id } = action.payload
+      const messages = state.messages[chatId]
+
+      if (!messages) {
+        return
+      }
+
+      if (messages.some((message) => message.id === id)) {
+        state.messages[chatId] = messages.filter((message) => message.id !== localId)
+        return
+      }
+
+      const message = messages.find((item) => item.id === localId)
+
+      if (message) {
+        message.id = id
+        message.status = 'sent'
+      }
+    },
+    messageFailed(state, action: PayloadAction<MessageFailedPayload>) {
+      const { chatId, id, error } = action.payload
+      const message = state.messages[chatId]?.find((item) => item.id === id)
+
+      if (message) {
+        message.status = 'failed'
+        message.error = error
+      }
+    },
   },
 })
 
-export const { chatsRestored, chatsCleared, chatAdded, activeChatChanged } = chatsSlice.actions
+export const {
+  chatsRestored,
+  chatsCleared,
+  chatAdded,
+  activeChatChanged,
+  messageAdded,
+  messageSent,
+  messageFailed,
+} = chatsSlice.actions
 export default chatsSlice.reducer
 
 type ChatsRootState = { chats: ChatsState }

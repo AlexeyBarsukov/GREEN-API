@@ -2,6 +2,8 @@ import { ArrowLeft } from 'lucide-react'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { formatPhone } from '../../shared/lib/phone'
 import { Avatar } from '../../shared/ui/Avatar/Avatar'
+import { MessageComposer } from '../messages/MessageComposer'
+import { MessageList } from '../messages/MessageList'
 import styles from './ChatPanel.module.css'
 import { activeChatChanged, selectActiveChat } from './chatsSlice'
 import { getChatTitle } from './getChatTitle'
@@ -45,7 +47,8 @@ export function ChatPanel() {
         </div>
       </header>
 
-      <div className={styles.body} />
+      <MessageList key={`list-${chat.id}`} chatId={chat.id} />
+      <MessageComposer key={`composer-${chat.id}`} chatId={chat.id} />
     </section>
   )
 }

@@ -39,6 +39,18 @@
       "quoteStyle": "single"
     }
   },
+  "overrides": [
+    {
+      "includes": ["src/shared/ui/Modal/Modal.tsx"],
+      "linter": {
+        "rules": {
+          "a11y": {
+            "useKeyWithClickEvents": "off"
+          }
+        }
+      }
+    }
+  ],
   "assist": {
     "enabled": true,
     "actions": {

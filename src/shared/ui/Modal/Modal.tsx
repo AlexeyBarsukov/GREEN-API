@@ -1,11 +1,5 @@
 import { X } from 'lucide-react'
-import {
-  type MouseEvent,
-  type ReactNode,
-  useEffect,
-  useId,
-  useRef
-} from 'react'
+import { type MouseEvent, type ReactNode, useEffect, useId, useRef } from 'react'
 import styles from './Modal.module.css'
 
 interface ModalProps {

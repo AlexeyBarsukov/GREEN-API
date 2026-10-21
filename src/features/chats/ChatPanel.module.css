@@ -20,7 +20,7 @@
   padding: 6px 14px;
   font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
-  background-color: rgb(27 28 33 / 85%);
+  background-color: var(--color-day-label-bg);
   border-radius: var(--radius-full);
 }
 
@@ -70,9 +70,4 @@
   margin: 0;
   font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
-}
-
-.body {
-  flex: 1;
-  min-height: 0;
 }

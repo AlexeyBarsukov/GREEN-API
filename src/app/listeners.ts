@@ -6,6 +6,9 @@ import {
   chatsCleared,
   chatsRestored,
   getChatsStorageKey,
+  messageAdded,
+  messageFailed,
+  messageSent,
   type StoredChats,
   selectStoredChats,
 } from '../features/chats/chatsSlice'
@@ -42,7 +45,7 @@ startAppListening({
 
 // Chats are kept per instance, so they are restored after the next login
 startAppListening({
-  matcher: isAnyOf(chatAdded, activeChatChanged),
+  matcher: isAnyOf(chatAdded, activeChatChanged, messageAdded, messageSent, messageFailed),
   effect: (_, api) => {
     const state = api.getState()
     const { credentials } = state.auth
